@@ -6,7 +6,10 @@ def getNodeValue(parent, node_name) :
     nodes = parent.getElementsByTagName(node_name)
     if not nodes:
         return None
-    return nodes[0].childNodes[0].data
+    node = nodes[0].childNodes;
+    if not node :
+        return None
+    return node[0].data
 
 def getEncoderParam(parent_node) :
     enc_param = {}

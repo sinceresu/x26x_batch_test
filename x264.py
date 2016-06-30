@@ -49,7 +49,7 @@ def encode(h264_file_name, yuv_file_name, file_prop, enc_param) :
     if enc_param['ref'] : 
         x264_param  +=   ' --ref ' + str(enc_param['ref'])
     if enc_param['bframes'] : 
-        x264_param  +=   ' --ref ' + str(enc_param['ref'])
+        x264_param  +=   ' --bframes ' + str(enc_param['bframes'])
     if enc_param['cmd'] : 
         x264_param  +=   ' ' + str(enc_param['cmd'])
 

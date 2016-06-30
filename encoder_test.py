@@ -22,7 +22,8 @@ recorder = Recorder('result.csv')
 
 for item in test_items:
     enc_result = {}   
-    print("encoder: %s input: %s output: %s" % (item['encoder'], item['input'], item['output']))
+    print("-----------------------------------------------------------------------------")
+    print("-----------------------------------------------------------------------------")
     if item['encoder'] == 'x264' : 
         enc_result = x264.encode(item['output'], item['input'], \
                 item['file_property'], item['encoder_param'])

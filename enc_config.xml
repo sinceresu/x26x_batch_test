@@ -20,6 +20,7 @@
     <preset>ultrafast</preset>
     <bitrate>300</bitrate>
     <keyint>250</keyint>
+    <cmd></cmd>
   </setting>
   <setting encoder="x265" name="normal h265" suffix="_normal">
     <profile>main</profile>
@@ -36,7 +37,7 @@
 	   <height>288</height>
 	   <framerate>25</framerate>
 	   <tests>
-	      <setting name="preview h264"/>
+	      <!--<setting name="preview h264"/>-->
        <setting name="preview h265"/>
        <setting name="normal h265"/>
      </tests>

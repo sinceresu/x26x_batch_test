@@ -61,7 +61,7 @@ def encode(output_file, yuv_file, file_prop, enc_param) :
     if enc_param['ref'] : 
         x265_param  +=   ' --ref ' + str(enc_param['ref'])
     if enc_param['bframes'] : 
-        x265_param  +=   ' --ref ' + str(enc_param['ref'])
+        x265_param  +=   ' --bframes ' + str(enc_param['bframes'])
     if enc_param['cmd'] : 
         x265_param  +=   ' ' + str(enc_param['cmd'])
 

@@ -3,6 +3,7 @@ import xml.dom.minidom
 import parse_config
 import testitem_builder
 import x264
+import x265
 from result_recorder import Recorder
 
 
@@ -22,11 +23,14 @@ recorder = Recorder('result.csv')
 for item in test_items:
     enc_result = {}      
     if item['encoder'] == 'x264' : 
-        result = x264.encode(item['output'], item['input'], \
-                item['file_property'], item['encoder_param'], \
-                enc_result)
-        recorder.record(item['output'], item['input'], \
-                item['file_property'], item['encoder_param'], \
-                enc_result)
+        enc_result = x264.encode(item['output'], item['input'], \
+                item['file_property'], item['encoder_param'])
+    elif item['encoder'] == 'x265' : 
+        enc_result = x265.encode(item['output'], item['input'], \
+                item['file_property'], item['encoder_param'])
+
+    recorder.record(item['output'], item['input'], \
+            item['file_property'], item['encoder_param'], \
+            enc_result)
 
 

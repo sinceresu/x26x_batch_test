@@ -21,8 +21,23 @@ def getRealBitrate(output) :
         return float(matchObj.group(1))
     
 
+def getResult(output) :
+    result = {}
+    index = output.rfind('encoded ')
+    line = output[index:]
+    matchObj = re.match( r'.*, (.*?) fps, (.*?) kb/s$', line, re.M|re.I)
+  #  print(matchObj.group(0))
+  #  print(matchObj.group(1))
+    if (matchObj) :
+        match_num = matchObj.group(1)
+        result['fps'] = float(match_num)
+        match_num = matchObj.group(2)
+        result['bitrate'] = float(match_num)
 
-def encode(h264_file_name, yuv_file_name, file_prop, enc_param, enc_result) :
+    result['psnr'] = getPsnr(output)
+    return result 
+
+def encode(h264_file_name, yuv_file_name, file_prop, enc_param) :
     x264_param = '--input-res ' + str(file_prop['width']) + 'x' + str(file_prop['height']) \
         + ' --fps ' + file_prop['framerate']
     if enc_param['profile'] : 
@@ -51,12 +66,11 @@ def encode(h264_file_name, yuv_file_name, file_prop, enc_param, enc_result) :
     output = raw_output.decode('utf-8')
     print(output)
 
-    psnr = getPsnr(output)
-    
-    if (not psnr) :
-        return -1
-    
-    enc_result['psnr'] = psnr
-    enc_result['real_bitrate'] = getRealBitrate(output)
-    return 0
+    #psnr = getPsnr(output)
+    #if (not psnr) :
+    #    return -1
+    enc_result = getResult(output)
+    #enc_result['psnr'] = psnr
+    #enc_result['real_bitrate'] = getRealBitrate(output)
+    return enc_result
 

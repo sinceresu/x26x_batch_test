@@ -42,6 +42,8 @@ def encode(h264_file_name, yuv_file_name, file_prop, enc_param) :
         + ' --fps ' + file_prop['framerate']
     if enc_param['profile'] : 
         x264_param  +=   ' --profile ' + enc_param['profile']
+    if enc_param['preset'] : 
+        x264_param  +=   ' --preset ' + enc_param['preset']
     if enc_param['bitrate'] : 
         x264_param  +=   ' --bitrate ' + str(enc_param['bitrate'])
     if enc_param['ref'] : 
@@ -54,23 +56,13 @@ def encode(h264_file_name, yuv_file_name, file_prop, enc_param) :
     command =  'x264 --psnr ' + x264_param + ' -o ' + h264_file_name + \
               ' ' + yuv_file_name
 #    print(command)
-    output_reader = Popen(command, stdout=PIPE, stderr=PIPE)
-    output_reader.wait()
-    
-    result = output_reader.returncode
-  #  print("result: %d" % result)
-    if (result !=0) :   
-        return -1
-    
-    raw_output = output_reader.stderr.read()
-    output = raw_output.decode('utf-8')
+
+    output_buf = Popen(command, stdout=PIPE, stderr=PIPE, shell=False).communicate() 
+    result = output_buf[len(output_buf) - 1]
+    output = result.decode('utf-8')
     print(output)
 
-    #psnr = getPsnr(output)
-    #if (not psnr) :
-    #    return -1
     enc_result = getResult(output)
-    #enc_result['psnr'] = psnr
-    #enc_result['real_bitrate'] = getRealBitrate(output)
+
     return enc_result
 

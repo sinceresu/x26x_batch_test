@@ -21,7 +21,8 @@ test_items = testitem_builder.buildTestItems(presets, files)
 recorder = Recorder('result.csv')
 
 for item in test_items:
-    enc_result = {}      
+    enc_result = {}   
+    print("encoder: %s input: %s output: %s" % (item['encoder'], item['input'], item['output']))
     if item['encoder'] == 'x264' : 
         enc_result = x264.encode(item['output'], item['input'], \
                 item['file_property'], item['encoder_param'])
@@ -33,4 +34,4 @@ for item in test_items:
             item['file_property'], item['encoder_param'], \
             enc_result)
 
-
+print('test ended!')

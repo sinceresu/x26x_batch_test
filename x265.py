@@ -54,8 +54,8 @@ def encode(output_file, yuv_file, file_prop, enc_param) :
         + ' --fps ' + file_prop['framerate']
     if enc_param['profile'] : 
         x265_param  +=   ' --profile ' + enc_param['profile']
-    #if enc_param['preset'] : 
-    #    x265_param  +=   ' --preset ' + enc_param['preset']
+    if enc_param['preset'] : 
+        x265_param  +=   ' --preset ' + enc_param['preset']
     if enc_param['bitrate'] : 
         x265_param  +=   ' --bitrate ' + str(enc_param['bitrate'])
     if enc_param['ref'] : 
@@ -67,17 +67,11 @@ def encode(output_file, yuv_file, file_prop, enc_param) :
 
     command =  'x265 --psnr ' + x265_param + ' -o ' + output_file + \
               ' ' + yuv_file
-#    print(command)
-    output_reader = Popen(command, stdout=PIPE, stderr=PIPE)
-    output_reader.wait()
-    
-    result = output_reader.returncode
-  #  print("result: %d" % result)
-    if (result !=0) :   
-        return -1
-    
-    raw_output = output_reader.stderr.read()
-    output = raw_output.decode('utf-8')
+    print(command)
+
+    output_buf = Popen(command, stdout=PIPE, stderr=PIPE, shell=False).communicate() 
+    result = output_buf[len(output_buf) - 1]
+    output = result.decode('utf-8')
     print(output)
 
     #psnr = getPsnr(output)

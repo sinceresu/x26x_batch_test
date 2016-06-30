@@ -2,7 +2,7 @@
 class Recorder:
      def __init__(self, file_name):
         self.file = open(file_name, "w")
-        self.file.write("input file, output file, width, height, framerate, profile, bitrate(kb/s), speed(fps), psnr(db), real bitrate(kb/s)\n")
+        self.file.write("input file, output file, width, height, framerate, profile, bitrate(kb/s), speed(fps), psnr(db), avg br(kb/s)\n")
 
      def record(self, h264_file_name, yuv_file_name, file_prop, enc_param, enc_result) :
        self.file.write("%s, %s, " % (yuv_file_name, h264_file_name))

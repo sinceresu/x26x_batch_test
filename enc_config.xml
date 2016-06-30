@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<yi_encoder logging="0">
+<settings>
+<setting encoder="x264" name="normal h264" suffix="_normal">
+   <profile>high</profile>
+   <preset>placebo</preset>
+   <bitrate>768</bitrate>
+   <keyint>250</keyint>
+   <cmd>--no-mbtree --ratetol 100.0 --level 4.1 --vbv-bufsize 50000 --vbv-maxrate 62500</cmd>
+</setting>
+<setting encoder="x264" name="preview h264" suffix="_preview">
+  <profile>high</profile>
+  <preset>placebo</preset>
+  <bitrate>300</bitrate>
+  <keyint>250</keyint>
+  <cmd>--no-mbtree --ratetol 100.0 --level 4.1 --vbv-bufsize 50000 --vbv-maxrate 62500</cmd>
+</setting>  
+<setting encoder="x265" name="normal h265" suffix="_normal">
+   <profile>main</profile>
+   <preset>slow</preset>
+   <bitrate>1280</bitrate>
+   <keyint>250</keyint>
+   <ref>4</ref>
+   <bframes>4</bframes>
+   <cmd>--preset placebo</cmd>
+</setting>
+</settings>
+<files>
+	<file url="football_cif.yuv" on="1">
+	   <width>352</width>
+	   <height>288</height>
+	   <framerate>25</framerate>
+	   <tests>
+	      <setting name="normal h264"/>
+	      <setting name="preview h264"/>
+	   </tests>
+	</file>
+</files>
+</yi_encoder>

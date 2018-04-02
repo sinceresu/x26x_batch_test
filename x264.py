@@ -11,14 +11,14 @@ def getPsnr(output) :
     if (matchObj) :
         return float(matchObj.group(1))
     
-def getRealBitrate(output) :
-    index = output.rfind('encoded ')
-    line = output[index:index + 50]
-    matchObj = re.match( r'.* fps, (.*?) kb/s', line, re.M|re.I)
-  #  print(matchObj.group(0))
-  #  print(matchObj.group(1))
-    if (matchObj) :
-        return float(matchObj.group(1))
+#def getRealBitrate(output) :
+#    index = output.rfind('encoded ')
+#    line = output[index:index + 50]
+#    matchObj = re.match( r'.* fps, (.*?) kb/s', line, re.M|re.I)
+#  #  print(matchObj.group(0))
+#  #  print(matchObj.group(1))
+#    if (matchObj) :
+#        return float(matchObj.group(1))
     
 
 def getResult(output) :
@@ -55,7 +55,7 @@ def encode(h264_file_name, yuv_file_name, file_prop, enc_param) :
 
     command =  'x264 --psnr ' + x264_param + ' -o ' + h264_file_name + \
               ' ' + yuv_file_name
-#    print(command)
+    print(command)
 
     output_buf = Popen(command, stdout=PIPE, stderr=PIPE, shell=False).communicate() 
     result = output_buf[len(output_buf) - 1]

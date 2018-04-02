@@ -55,9 +55,10 @@ def getFiles(parent_node) :
         tests_node = parent_node.getElementsByTagName("tests")[0]
         test_nodes = tests_node.getElementsByTagName("setting")
         for test_node in test_nodes:
-            setting_name = test_node.getAttribute('name')
-            if setting_name :
-                test_settings.append(setting_name)
+            setting = {}
+            setting['name'] = test_node.getAttribute('name')
+            setting['on'] = test_node.getAttribute('on')
+            test_settings.append(setting)
         file['tests'] = test_settings
         files.append(file)
     return files
